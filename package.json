@@ -1,0 +1,51 @@
+{
+  "name": "feige-storyboard",
+  "version": "0.4.0",
+  "description": "FeiGe local-first AI video breakdown, storyboard analysis, and script export workbench",
+  "main": "src/main.js",
+  "author": "FeiGe",
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "electron .",
+    "setup:ffmpeg": "node scripts/fetch-ffmpeg.js",
+    "test": "node scripts/self-test.js",
+    "test:ui": "electron . --ui-smoke-test",
+    "pack": "electron-builder --win dir",
+    "dist": "electron-builder --win zip"
+  },
+  "devDependencies": {
+    "electron": "^37.2.0",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "com.feige.storyboard",
+    "productName": "FeiGe",
+    "asar": true,
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "vendor",
+        "to": "vendor",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "target": [
+        "dir"
+      ],
+      "artifactName": "FeiGe-${version}-portable.${ext}"
+    }
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "docx": "^9.5.1",
+    "exceljs": "^4.4.0",
+    "undici": "^7.16.0"
+  }
+}

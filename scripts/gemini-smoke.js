@@ -1,0 +1,6 @@
+const fs=require('fs');const{ProxyAgent}=require('undici');
+const [,,config,image]=process.argv;
+const y=fs.readFileSync(config,'utf8'),section=y.match(/gemini:\s*\n([\s\S]*?)(?=\n\S|$)/)?.[1]||'';
+const key=section.match(/api_key:\s*['"]?([^'"\r\n]+)['"]?/)?.[1]?.trim(),model=section.match(/model:\s*['"]?([^'"\r\n]+)['"]?/)?.[1]?.trim();
+if(!key||!model)throw new Error('Gemini 配置不完整');
+(async()=>{const url=`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(key)}`;const dispatcher=process.env.HTTPS_PROXY?new ProxyAgent(process.env.HTTPS_PROXY):undefined;const r=await fetch(url,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({contents:[{role:'user',parts:[{text:'用中文简短描述这幅视频帧，只返回 JSON：{"ok":true,"description":"..."}'},{inlineData:{mimeType:'image/jpeg',data:fs.readFileSync(image).toString('base64')}}]}],generationConfig:{responseMimeType:'application/json'}}),dispatcher});if(!r.ok)throw new Error(`${r.status} ${await r.text()}`);const j=await r.json();console.log(JSON.stringify({ok:true,model,response:j.candidates?.[0]?.content?.parts?.[0]?.text||''}))})().catch(e=>{console.error(e.message);process.exit(1)});

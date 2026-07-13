@@ -1,0 +1,321 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: file:; img-src 'self' data: file:; media-src 'self' data: file: blob:; style-src 'self' 'unsafe-inline'; script-src 'self'">
+  <title>FeiGe</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg class="icon-sprite" aria-hidden="true">
+    <symbol id="icon-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-2.8 2.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6v.2h-4V21a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1L4.2 17l.1-.1a1.7 1.7 0 0 0 .3-1.9A1.7 1.7 0 0 0 3 14H2.8v-4H3a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9L4.2 7 7 4.2l.1.1A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-1.6v-.2h4V3a1.7 1.7 0 0 0 1 1.6 1.7 1.7 0 0 0 1.9-.3l.1-.1L19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.6 1h.2v4H21a1.7 1.7 0 0 0-1.6 1Z"/></symbol>
+    <symbol id="icon-folder" viewBox="0 0 24 24"><path d="M3 6.5h6l2 2h10v9.5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M3 10h18"/></symbol>
+    <symbol id="icon-download" viewBox="0 0 24 24"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14"/></symbol>
+    <symbol id="icon-chevron" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></symbol>
+    <symbol id="icon-film" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 5v14M17 5v14M3 9h4m10 0h4M3 15h4m10 0h4"/></symbol>
+    <symbol id="icon-stack" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></symbol>
+    <symbol id="icon-scissors" viewBox="0 0 24 24"><circle cx="6" cy="7" r="3"/><circle cx="6" cy="17" r="3"/><path d="m8.7 8.3 11.3 7.2M8.7 15.7 20 8.5"/></symbol>
+    <symbol id="icon-marker" viewBox="0 0 24 24"><path d="M5 4v16M5 12h14"/><path d="m15 8 4 4-4 4"/></symbol>
+    <symbol id="icon-scan" viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 0 0-2 2v3m13-5h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3m13 5h3a2 2 0 0 0 2-2v-3"/><path d="M7 12h10M12 7v10"/></symbol>
+    <symbol id="icon-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5"/><path d="M19 12a7 7 0 1 0-2 5"/></symbol>
+    <symbol id="icon-wand" viewBox="0 0 24 24"><path d="m4 20 10-10M13 5l1-3 1 3 3 1-3 1-1 3-1-3-3-1ZM18 14l.8-2 .7 2 2 .7-2 .8-.7 2-.8-2-2-.8Z"/><path d="m5 15 4 4"/></symbol>
+    <symbol id="icon-script" viewBox="0 0 24 24"><path d="M6 3h9l3 3v15H6Z"/><path d="M14 3v4h4M9 11h6M9 15h6"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="icon-video" viewBox="0 0 24 24"><rect x="3" y="6" width="14" height="12" rx="2"/><path d="m17 10 4-2v8l-4-2Z"/></symbol>
+    <symbol id="icon-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+    <symbol id="icon-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="icon-alert" viewBox="0 0 24 24"><path d="M12 3 2.8 20h18.4Z"/><path d="M12 9v5m0 3h.01"/></symbol>
+  </svg>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <header class="brand">
+        <div class="logo frame-gate" aria-hidden="true">F</div>
+        <div class="brand-copy"><strong>FeiGe</strong><span data-i18n="brand.subtitle">VIDEO BREAKDOWN</span></div>
+      </header>
+
+      <button class="new-project primary" data-kind="project" type="button">
+        <svg class="icon"><use href="#icon-plus"/></svg>
+        <span data-i18n="nav.newProject">新建拆片项目</span>
+      </button>
+
+      <div class="side-lists">
+        <section class="side-section">
+          <div class="section-title">
+            <span data-i18n="nav.projects">拆片项目</span>
+            <button class="icon-button subtle add-btn" data-kind="project" type="button" data-i18n-title="a11y.addProject" data-i18n-aria-label="a11y.addProject">
+              <svg class="icon"><use href="#icon-plus"/></svg>
+            </button>
+          </div>
+          <div id="projectList" class="nav-list"></div>
+        </section>
+
+        <section class="side-section research">
+          <div class="section-title">
+            <span data-i18n="nav.research">风格研究</span>
+            <button class="icon-button subtle add-btn" data-kind="research" type="button" data-i18n-title="a11y.addResearch" data-i18n-aria-label="a11y.addResearch">
+              <svg class="icon"><use href="#icon-plus"/></svg>
+            </button>
+          </div>
+          <div id="researchList" class="nav-list"></div>
+        </section>
+      </div>
+
+      <footer class="sidebar-footer">
+        <div class="task-status" role="status" aria-live="polite">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="taskStatus" data-i18n="status.ready">本地工作区已就绪</span>
+        </div>
+        <div class="sidebar-tools">
+          <div class="language-control" id="languageSwitch" role="group" data-i18n-aria-label="a11y.language">
+            <svg class="icon language-icon" aria-hidden="true"><use href="#icon-globe"/></svg>
+            <button type="button" data-locale="zh-CN">中</button>
+            <span aria-hidden="true">/</span>
+            <button type="button" data-locale="en-US">EN</button>
+          </div>
+          <button id="settingsBtn" class="settings-button" type="button" data-i18n-title="a11y.settings" data-i18n-aria-label="a11y.settings">
+            <svg class="icon"><use href="#icon-settings"/></svg>
+            <span data-i18n="nav.settings">设置</span>
+          </button>
+        </div>
+      </footer>
+    </aside>
+
+    <main id="main">
+      <section id="emptyView" class="empty-view">
+        <div class="empty-workbench">
+          <div class="empty-copy">
+            <span class="eyebrow" data-i18n="empty.eyebrow">LOCAL VIDEO WORKBENCH</span>
+            <h1 data-i18n="empty.title">把视频拆成可执行的镜头语言</h1>
+            <p data-i18n="empty.description">导入视频后，FeiGe 会在本机完成硬切拆镜、代表帧提取、AI 镜头识别、剧本整理与成品导出。</p>
+            <div class="empty-actions">
+              <button class="primary large" data-kind="project" type="button">
+                <svg class="icon"><use href="#icon-plus"/></svg>
+                <span data-i18n="nav.newProject">新建拆片项目</span>
+              </button>
+              <button data-kind="research" type="button">
+                <svg class="icon"><use href="#icon-stack"/></svg>
+                <span data-i18n="nav.newResearch">新建风格研究</span>
+              </button>
+            </div>
+          </div>
+          <ol class="workflow" aria-label="Workflow">
+            <li><span>01</span><svg class="icon"><use href="#icon-video"/></svg><div><b data-i18n="empty.stepImport">导入视频</b><small data-i18n="empty.stepImportHint">读取本地素材</small></div></li>
+            <li><span>02</span><svg class="icon"><use href="#icon-scissors"/></svg><div><b data-i18n="empty.stepSplit">自动拆镜</b><small data-i18n="empty.stepSplitHint">依据真实硬切点</small></div></li>
+            <li><span>03</span><svg class="icon"><use href="#icon-scan"/></svg><div><b data-i18n="empty.stepAnalyze">识别镜头</b><small data-i18n="empty.stepAnalyzeHint">连接你的大模型</small></div></li>
+            <li><span>04</span><svg class="icon"><use href="#icon-download"/></svg><div><b data-i18n="empty.stepExport">整理导出</b><small data-i18n="empty.stepExportHint">Word · Excel · HTML</small></div></li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="workspace" class="workspace hidden">
+        <header class="topbar">
+          <div class="project-identity">
+            <div class="project-heading"><span id="kindBadge" class="badge">拆片项目</span><h2 id="projectName"></h2></div>
+            <p id="videoName"></p>
+          </div>
+          <div class="top-actions">
+            <button id="openFolder" type="button">
+              <svg class="icon"><use href="#icon-folder"/></svg>
+              <span data-i18n="top.openFolder">项目文件夹</span>
+            </button>
+            <details id="exportMenu" class="export-menu">
+              <summary>
+                <svg class="icon"><use href="#icon-download"/></svg>
+                <span data-i18n="export.menu">分别导出</span>
+                <svg class="icon chevron"><use href="#icon-chevron"/></svg>
+              </summary>
+              <div class="export-popover">
+                <button id="exportScript" type="button"><svg class="icon"><use href="#icon-script"/></svg><span><b data-i18n="export.word">Word 剧本</b><small>.docx</small></span></button>
+                <button id="exportBoard" type="button"><svg class="icon"><use href="#icon-film"/></svg><span><b data-i18n="export.excel">Excel 分镜表</b><small>.xlsx</small></span></button>
+                <button id="exportHtml" type="button"><svg class="icon"><use href="#icon-globe"/></svg><span><b data-i18n="export.html">HTML 成品页</b><small>.html</small></span></button>
+              </div>
+            </details>
+            <button id="exportAll" class="primary" type="button">
+              <svg class="icon"><use href="#icon-download"/></svg>
+              <span data-i18n="export.all">导出全部</span>
+            </button>
+          </div>
+        </header>
+
+        <div class="work-grid">
+          <section class="video-panel panel">
+            <header class="panel-header source-header">
+              <div><span class="panel-kicker" data-i18n="video.source">SOURCE MONITOR</span><b data-i18n="video.preview">视频监看</b></div>
+              <time id="durationLabel">00:00:00</time>
+            </header>
+            <div class="media-stage frame-gate">
+              <video id="video" controls></video>
+            </div>
+            <div class="difference-curve" id="differenceCurve" data-i18n-title="timeline.hint" title="单击定位，右键增加切点">
+              <canvas id="differenceCanvas" aria-label="镜头差异曲线"></canvas>
+              <div class="curve-legend"><span data-i18n="timeline.difference">镜头差异</span><small data-i18n="timeline.rightClick">右键增加切点</small></div>
+            </div>
+            <div class="timeline-tools">
+              <div class="split-info">
+                <svg class="icon"><use href="#icon-scissors"/></svg>
+                <div><b data-i18n="video.sceneSplit">场景拆分</b><span data-i18n="video.adaptive">自适应硬切 · 不限制镜头数量</span></div>
+              </div>
+              <div class="split-actions">
+                <button id="manualCut" type="button">
+                  <svg class="icon"><use href="#icon-marker"/></svg>
+                  <span data-i18n="video.manualCut">在当前时间加切点</span>
+                </button>
+                <button id="detectBtn" class="primary" type="button">
+                  <svg class="icon"><use href="#icon-scissors"/></svg>
+                  <span data-i18n="video.autoSplit">自动拆镜</span>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <section class="editor-panel panel">
+            <div class="editor-modebar">
+              <div class="tabs" role="tablist" data-i18n-aria-label="a11y.editorTabs">
+                <button class="tab active" data-tab="shots" id="shotsTab" type="button" role="tab" aria-controls="shotsPane" aria-selected="true">
+                  <svg class="icon"><use href="#icon-film"/></svg><span data-i18n="editor.shots">分镜表</span>
+                </button>
+                <button class="tab" data-tab="script" id="scriptTab" type="button" role="tab" aria-controls="scriptPane" aria-selected="false">
+                  <svg class="icon"><use href="#icon-script"/></svg><span data-i18n="editor.script">剧本</span>
+                </button>
+              </div>
+              <span id="shotCount" class="shot-count">0 <span data-i18n="common.shots">镜头</span></span>
+            </div>
+            <div class="editor-actions">
+              <button id="retryFailed" type="button">
+                <svg class="icon"><use href="#icon-refresh"/></svg>
+                <span data-i18n="editor.retryFailed">重试失败</span>
+              </button>
+              <button id="analyzeAll" class="primary" type="button">
+                <svg class="icon"><use href="#icon-scan"/></svg>
+                <span data-i18n="editor.analyzeAll">AI 识别全部镜头</span>
+              </button>
+              <button id="generateScript" type="button">
+                <svg class="icon"><use href="#icon-wand"/></svg>
+                <span data-i18n="editor.generateScript">AI 生成剧本</span>
+              </button>
+            </div>
+
+            <div id="shotsPane" class="pane" role="tabpanel" aria-labelledby="shotsTab">
+              <div id="analysisBanner" class="analysis-banner hidden" role="status" aria-live="polite"></div>
+              <div id="sceneChips" class="scene-chips" data-i18n-aria-label="a11y.sceneFilters"></div>
+              <div id="shots" class="shots"></div>
+            </div>
+
+            <div id="scriptPane" class="pane script-pane hidden" role="tabpanel" aria-labelledby="scriptTab">
+              <div class="script-versionbar">
+                <label><span data-i18n="script.version">剧本版本</span><select id="scriptVersion"></select></label>
+                <button id="regenerateScript" type="button"><svg class="icon"><use href="#icon-refresh"/></svg><span data-i18n="script.regenerate">重新生成</span></button>
+                <button id="deleteScriptVersion" class="danger-quiet" type="button"><svg class="icon"><use href="#icon-close"/></svg><span data-i18n="script.deleteVersion">删除版本</span></button>
+              </div>
+              <div id="scriptScenes" class="script-scenes"></div>
+              <details class="raw-script">
+                <summary data-i18n="script.rawEdit">全文编辑</summary>
+                <textarea id="scriptEditor" data-i18n-placeholder="script.placeholder" placeholder="剧本会显示在这里，也可以直接编辑…"></textarea>
+              </details>
+              <div class="script-footer"><span data-i18n="script.localHint">修改同步保存到当前版本</span><button id="saveScript" class="primary" type="button"><svg class="icon"><use href="#icon-check"/></svg><span data-i18n="script.save">保存当前版本</span></button></div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="newDialog">
+    <form method="dialog" class="dialog-card new-dialog-card">
+      <div class="dialog-head">
+        <div><span class="eyebrow" data-i18n="dialog.new.eyebrow">NEW WORKSPACE</span><h3 id="newTitle">新建项目</h3><p data-i18n="dialog.new.description">选择一个本地视频，创建独立的拆片工作区。</p></div>
+        <button value="cancel" class="icon-button" data-i18n-title="common.close" data-i18n-aria-label="common.close"><svg class="icon"><use href="#icon-close"/></svg></button>
+      </div>
+      <div class="form-stack">
+        <label><span data-i18n="dialog.new.name">项目名称</span><input id="newName" data-i18n-placeholder="dialog.new.namePlaceholder" placeholder="默认使用视频文件名"></label>
+        <label><span data-i18n="dialog.new.video">视频文件</span><div class="file-row"><input id="videoPath" readonly data-i18n-placeholder="dialog.new.videoPlaceholder" placeholder="选择 MP4 / MOV / MKV…"><button id="chooseVideo" type="button"><svg class="icon"><use href="#icon-video"/></svg><span data-i18n="dialog.new.choose">选择视频</span></button></div></label>
+      </div>
+      <div class="dialog-actions"><button value="cancel" data-i18n="common.cancel">取消</button><button id="createBtn" type="button" class="primary"><svg class="icon"><use href="#icon-plus"/></svg><span data-i18n="dialog.new.create">创建并打开</span></button></div>
+    </form>
+  </dialog>
+
+  <dialog id="settingsDialog">
+    <form method="dialog" class="dialog-card settings-card">
+      <div class="dialog-head settings-head">
+        <div><span class="eyebrow" data-i18n="settings.eyebrow">LOCAL &amp; PRIVATE</span><h3 data-i18n="settings.title">模型与拆片设置</h3><p data-i18n="settings.description">连接你自己的模型接口，密钥只保存在本机。</p></div>
+        <button value="cancel" class="icon-button" data-i18n-title="common.close" data-i18n-aria-label="common.close"><svg class="icon"><use href="#icon-close"/></svg></button>
+      </div>
+      <div class="settings-scroll">
+        <section class="settings-section provider-section">
+          <div class="section-heading"><span><b data-i18n="settings.providerTitle">模型接口</b><small data-i18n="settings.providerHint">选择预设，或添加任意 OpenAI 兼容接口</small></span></div>
+          <div class="settings-layout"><nav id="providerNav" data-i18n-aria-label="a11y.providers"></nav><section id="providerForm"></section></div>
+        </section>
+
+        <section class="settings-section">
+          <div class="section-heading"><span><b data-i18n="settings.splitTitle">拆镜与识别</b><small data-i18n="settings.splitHint">硬切阈值会按每个视频的变化分布自动计算</small></span></div>
+          <div class="advanced">
+            <fieldset class="detection-mode"><legend data-i18n="settings.detectionMode">切割方式</legend><div class="segmented">
+              <label><input type="radio" name="detectionMode" value="hybrid"><span><b data-i18n="settings.hybrid">混合检测（推荐）</b><small data-i18n="settings.hybridHint">硬切、白闪、渐隐渐现与叠化融合</small></span></label>
+              <label><input type="radio" name="detectionMode" value="classic"><span><b data-i18n="settings.classic">经典帧差检测</b><small data-i18n="settings.classicHint">速度快，适合纯硬切素材</small></span></label>
+            </div></fieldset>
+            <label data-hybrid-setting><span data-i18n="settings.hardCutFloor">硬切最低帧差（%）</span><input id="setHardCutFloor" type="number" min="0.5" max="60" step="0.1"></label>
+            <label data-hybrid-setting><span data-i18n="settings.relativeMultiplier">硬切相对倍率</span><input id="setRelativeMultiplier" type="number" min="1.2" max="30" step="0.1"></label>
+            <label data-classic-setting><span data-i18n="settings.classicThreshold">经典帧差阈值</span><input id="setClassicThreshold" type="number" min="0.01" max="1" step="0.01"></label>
+            <label><span data-i18n="settings.minGap">最小峰值间隔（秒）</span><input id="setMinGap" type="number" min="0.1" step="0.1"></label>
+            <label><span data-i18n="settings.maxShots">最大分镜数</span><input id="setMaxShots" type="number" min="2" max="6000" step="1"></label>
+            <label><span data-i18n="settings.concurrency">AI 并发数</span><input id="setConcurrency" type="number" min="1" max="10"></label>
+            <label class="check-label"><input id="setAutoAnalyze" type="checkbox"><span><b data-i18n="settings.autoAnalyze">自动拆镜后立即识别全部镜头</b><small data-i18n="settings.autoAnalyzeHint">拆镜完成后直接调用当前模型</small></span></label>
+            <div class="info-note"><svg class="icon"><use href="#icon-alert"/></svg><span data-i18n="settings.unlimited">镜头数量不设上限，切点完全根据视频自身硬切自动分配。</span></div>
+          </div>
+        </section>
+
+        <section class="settings-section prompt-section">
+          <div class="prompt-grid">
+            <label><span data-i18n="settings.shotPrompt">逐镜识别提示词</span><textarea id="shotPrompt"></textarea></label>
+            <label><span data-i18n="settings.scriptPrompt">剧本生成提示词</span><textarea id="scriptPrompt"></textarea></label>
+          </div>
+        </section>
+      </div>
+      <div class="settings-footer"><p class="privacy"><svg class="icon"><use href="#icon-check"/></svg><span data-i18n="settings.privacy">API Key 使用 Windows 加密能力保护；分享压缩包不会携带密钥。</span></p><div class="dialog-actions"><button value="cancel" data-i18n="common.cancel">取消</button><button id="saveSettings" type="button" class="primary"><svg class="icon"><use href="#icon-check"/></svg><span data-i18n="settings.save">保存设置</span></button></div></div>
+    </form>
+  </dialog>
+
+  <dialog id="shotEditDialog">
+    <form method="dialog" class="dialog-card edit-dialog-card">
+      <div class="dialog-head"><div><span class="eyebrow" data-i18n="shot.editEyebrow">SHOT EDITOR</span><h3 id="shotEditTitle">编辑镜头</h3></div><button value="cancel" class="icon-button" data-i18n-aria-label="common.close"><svg class="icon"><use href="#icon-close"/></svg></button></div>
+      <div class="edit-grid">
+        <label><span data-i18n="field.scene">场景</span><input id="editScene"></label>
+        <label><span data-i18n="field.timeOfDay">时间</span><input id="editTimeOfDay"></label>
+        <label><span data-i18n="field.interiorExterior">内外景</span><input id="editInteriorExterior"></label>
+        <label><span data-i18n="field.shotSize">景别</span><input id="editShotSize"></label>
+        <label><span data-i18n="field.angle">角度</span><input id="editAngle"></label>
+        <label><span data-i18n="field.movement">运镜</span><input id="editMovement"></label>
+        <label class="field-wide"><span data-i18n="field.description">画面描述</span><textarea id="editDescription"></textarea></label>
+        <label class="field-wide"><span data-i18n="field.dialogue">台词 / 字幕</span><textarea id="editDialogue"></textarea></label>
+        <label class="field-wide"><span data-i18n="field.sound">声音 / 音效</span><textarea id="editSound"></textarea></label>
+      </div>
+      <div class="dialog-actions"><button value="cancel" data-i18n="common.cancel">取消</button><button id="saveShotEdit" type="button" class="primary"><svg class="icon"><use href="#icon-check"/></svg><span data-i18n="common.save">保存</span></button></div>
+    </form>
+  </dialog>
+
+  <dialog id="sceneEditDialog">
+    <form method="dialog" class="dialog-card scene-edit-card">
+      <div class="dialog-head"><div><span class="eyebrow" data-i18n="script.sceneEyebrow">SCRIPT SCENE</span><h3 id="sceneEditTitle">编辑场景</h3></div><button value="cancel" class="icon-button" data-i18n-aria-label="common.close"><svg class="icon"><use href="#icon-close"/></svg></button></div>
+      <label><span data-i18n="script.sceneSource">场景原文</span><textarea id="editSceneSource"></textarea></label>
+      <div class="dialog-actions"><button value="cancel" data-i18n="common.cancel">取消</button><button id="saveSceneEdit" type="button" class="primary"><svg class="icon"><use href="#icon-check"/></svg><span data-i18n="common.save">保存</span></button></div>
+    </form>
+  </dialog>
+
+  <div id="contextMenu" class="context-menu hidden" role="menu"></div>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <div id="progressOverlay" class="progress-overlay hidden" aria-live="polite">
+    <div class="progress-card">
+      <div class="progress-head"><span class="progress-symbol"><svg class="icon"><use href="#icon-scan"/></svg></span><div><span data-i18n="progress.task">当前任务</span><h3 id="progressText" data-i18n="progress.processing">处理中…</h3></div></div>
+      <progress id="progressBar" max="1"></progress>
+      <button id="cancelTask" class="cancel-task hidden" type="button"><svg class="icon"><use href="#icon-close"/></svg><span data-i18n="progress.cancel">取消批量识别</span></button>
+    </div>
+  </div>
+
+  <script src="i18n.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>
